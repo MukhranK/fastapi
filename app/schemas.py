@@ -9,7 +9,9 @@ class PostBase(BaseModel):
     published: bool = True
 
 class PostCreate(PostBase):
-    pass    
+    class Config:
+        from_attributes = True
+    
 
 class Post(PostBase):
     # id: int 
@@ -34,6 +36,8 @@ class UserLogin(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+    class Config:
+        from_attributes = True
     
 class TokenData(BaseModel):
     id: Optional[str] = None

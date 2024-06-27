@@ -1,24 +1,14 @@
-from typing import Optional,List
-from fastapi import FastAPI, Response, status, HTTPException, Depends
-from fastapi.params import Body
-from pydantic import BaseModel
-from random import randrange
+from fastapi import FastAPI
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import time
-from sqlalchemy.orm import Session
-from . import models, utils
-from .database import engine, get_db
-# from .schemas import PostCreate, Post, UserCreate, UserOut
-
+from . import models
+from .database import engine
 from .routers import user, post, auth
-
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-
- 
 
 while True:
     try:
@@ -31,8 +21,6 @@ while True:
         print("Failed to connect")
         print("Error: ", error)
         time.sleep(2)    
-
-
 
 app.include_router(post.router)
 app.include_router(user.router)
