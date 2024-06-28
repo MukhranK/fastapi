@@ -4,7 +4,7 @@ from psycopg2.extras import RealDictCursor
 import time
 from . import models
 from .database import engine
-from .routers import user, post, auth
+from .routers import user, post, auth, vote
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -25,6 +25,7 @@ while True:
 app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
+app.include_router(vote.router)
 
 @app.get("/")
 def root():
@@ -40,3 +41,5 @@ def root():
     
 
 #uvicorn app.main:app --reload
+
+#   8 38 38
